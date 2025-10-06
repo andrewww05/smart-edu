@@ -1,0 +1,45 @@
+body {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    max-width: 1920px;
+    background: var(--bg-color) url("/static/images/background.png") no-repeat fixed center center;
+    background-size: cover;
+    color: var(--font-color-primary);
+    margin: 0 auto;
+}
+
+.header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 50px;
+    border: 1px solid var(--border-color-light);
+}
+
+.header__logo {
+    width: 231px;
+    height: 59px;
+    cursor: pointer;
+}
+
+.header__button_group {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+}
+
+.header__button {
+    font-size: 24px;
+}
+
+.header__button:link {
+    text-decoration: none;
+    color: var(--font-color-primary);
+}
+
+.header__button--selected:link {
+    color: var(--brand-purple-light);
+}

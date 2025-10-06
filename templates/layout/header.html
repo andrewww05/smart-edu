@@ -1,0 +1,40 @@
+{% load static %}
+
+<div class="header__wrapper">
+    <a class="header__logo" href="/">
+        <img src="{% static 'svg/smart-edu-logo.svg' %}" alt="logo"/>
+    </a>
+
+    <ul class="header__button_group">
+        <li>
+            <a
+                href="/schedule"
+                class="header__button"
+                x-data="{ isActive: window.location.pathname.includes('/schedule') }"
+                :class="{ 'header__button--selected': isActive }"
+            >
+                Розклад
+            </a>
+        </li>
+        <li>
+            <a
+                    href="/faq"
+                    class="header__button"
+                    x-data="{ isActive: window.location.pathname.includes('/faq') }"
+                    :class="{ 'header__button--selected': isActive }"
+            >
+                FAQ
+            </a>
+        </li>
+        <li>
+            <a
+                    href="/map"
+                    class="header__button"
+                    x-data="{ isActive: window.location.pathname.includes('/map') }"
+                    :class="{ 'header__button--selected': isActive }"
+            >
+                Мапа корпусу
+            </a>
+        </li>
+    </ul>
+</div>

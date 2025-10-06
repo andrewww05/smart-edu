@@ -1,0 +1,21 @@
+<html lang="uk">
+<head>
+    <title>{% block title %}Authorization{% endblock %}</title>
+    {% include "../component/scripts.html" %}
+    {% include "../component/stylesheets.html" %}
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
+</head>
+<body>
+<header>
+    {% include "./header.html" %}
+</header>
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+<footer>
+    footer
+</footer>
+</body>
+</html>

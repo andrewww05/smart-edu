@@ -1,0 +1,15 @@
+:root {
+    /* Colors */
+    --brand-purple-dark: #0E0A3B;
+    --brand-purple: #2E1B67;
+    --brand-purple-light: #9747FF;
+
+    --brand-purple-light-60: #9747FF60;
+
+    /* Theme */
+    --bg-color: var(--brand-purple-dark);
+    --bg-main: var(--brand-purple-dark);
+    --font-color-primary: #FFFFFF;
+    --font-color-secondary: #00000080;
+    --border-color-light: var(--brand-purple-light-60);
+}
