@@ -1,7 +1,7 @@
 {% extends "../../layout/layout.html" %}
 {% load static %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/pages/auth.css' %}">
@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="auth__wrapper">
-    <h1 class="auth__title">Увійти</h1>
+    <h1 class="auth__title">Реєстрація</h1>
     <div class="auth se-card">
         <form class="auth__form">
             <div class="se-field">
@@ -17,19 +17,27 @@
                 <input class="se-input" type="email" id="email" name="email" placeholder="@chnu.edu.ua" required>
             </div>
             <div class="se-field">
+                <label class="se-label" for="name">Ім'я</label>
+                <input class="se-input" type="text" id="name" name="name" required>
+            </div>
+            <div class="se-field">
+                <label class="se-label" for="surname">Прізвище</label>
+                <input class="se-input" type="text" id="surname" name="surname" required>
+            </div>
+            <div class="se-field">
                 <label class="se-label" for="password">Пароль</label>
                 <input class="se-input" type="password" id="password" name="password" required>
             </div>
-            <div class="auth__checkbox-wrapper">
+            <div class="se-checkbox-wrapper">
                 <input class="se-checkbox" type="checkbox" id="remember" name="remember">
                 <label class="se-checkbox-label" for="remember">Запам'ятати мене</label>
             </div>
-            <button class="se-button" type="submit">Увійти</button>
+            <button class="se-button" type="submit">Зареєструватися</button>
         </form>
     </div>
     <div class="auth__footer">
-        <span class="auth__footer-text">Ще не маєте акаунту?</span>
-        <a class="auth__footer-link" href="{% url 'register' %}">Зареєструватися</a>
+        <span class="auth__footer-text">Вже маєте акаунт?</span>
+        <a class="auth__footer-link" href="{% url 'login' %}">Увійти</a>
     </div>
 </div>
 {% endblock %}

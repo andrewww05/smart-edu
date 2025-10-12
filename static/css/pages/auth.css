@@ -1,0 +1,57 @@
+article:has(.auth__wrapper) {
+    display: flex;
+}
+
+.auth__wrapper {
+    margin: auto;
+    padding: 40px 0;
+    width: 100%;
+    height: fit-content;
+    max-width: 526px;
+    min-width: 320px;
+}
+
+.auth__title {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.auth__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 0;
+    gap: 26px;
+}
+
+.auth__footer {
+    text-align: center;
+    margin-top: 27px;
+}
+
+.auth__footer-text {
+    color: #ffffff;
+    font-size: 0.9375rem;
+}
+
+.auth__footer-link {
+    color: #ffffff;
+    font-size: 0.9375rem;
+    font-weight: 600;   
+    text-decoration: none;
+}
+
+.auth__footer-link:hover {
+    text-decoration: underline;
+}
+
+.auth__checkbox-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    gap: 0.9375rem;
+    line-height: 1.5;
+}

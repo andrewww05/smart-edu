@@ -1,15 +1,32 @@
 :root {
     /* Colors */
-    --brand-purple-dark: #0E0A3B;
-    --brand-purple: #2E1B67;
-    --brand-purple-light: #9747FF;
+    --brand-purple-dark: rgb(14 10 59);
+    --brand-purple: rgb(46 27 103);
+    --brand-purple-light: rgb(151 71 255);
 
-    --brand-purple-light-60: #9747FF60;
+    --brand-purple-50: rgba(46, 27, 103, 0.5);
+    --brand-purple-80: rgba(46, 27, 103, 0.8);
 
+    --brand-purple-dark-60: rgba(14, 10, 59, 0.6);
+    --brand-purple-light-60: rgba(151, 71, 255, 0.6);
+
+    /* / / / */
     /* Theme */
+    /* / / / */
     --bg-color: var(--brand-purple-dark);
     --bg-main: var(--brand-purple-dark);
-    --font-color-primary: #FFFFFF;
-    --font-color-secondary: #00000080;
+    --font-color-primary: rgb(255, 255, 255);
+    --font-color-secondary: rgba(0, 0, 0, 0.5);
+
     --border-color-light: var(--brand-purple-light-60);
+
+    /* Label */
+    --label-text: rgba(255, 255, 255, 0.9);
+
+    /* Input */
+    --input-bg: rgba(255, 255, 255, 0.8);
+    --input-bg-focus: rgba(255, 255, 255, 1);
+    --input-text: rgb(0 0 0);
+    --input-placeholder: rgba(0, 0, 0, 0.5);
+    --input-border: none;
 }
