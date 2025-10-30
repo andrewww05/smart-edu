@@ -34,12 +34,18 @@ input.se-input {
 }
 
 input.se-input:focus {
-    background: var(--input-bg-focus);
+    border: 1px solid var(--brand-error);
 }
 
 input.se-input::placeholder {
     font-size: 0.9375rem;
     color: var(--input-placeholder);
+}
+
+.se-field.error > input.se-input {
+    border: none;
+    background-color: var(--input-bg-error);
+    border: 3px solid var(--brand-error);
 }
 
 /* Checkbox */
@@ -84,4 +90,14 @@ button.se-button:hover {
 
 button.se-button:active {
     transform: scale(0.98);
+}
+
+/* Error */
+.se-field > .se-error::before {
+    content: '* ';
+    color: var(--brand-error);
+}
+
+.se-field > .se-error {
+    color: var(--brand-error);
 }

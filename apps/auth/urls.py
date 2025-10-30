@@ -1,8 +1,9 @@
 from django.urls import path
+from .controller import AuthController
 
-from . import views
+_authController = AuthController()
 
 urlpatterns = [
-    path("login", views.login, name="login"),
-    path("register", views.register, name="register"),
+    path("login", _authController.login, name="login"),
+    path("register", _authController.register, name="register"),
 ]

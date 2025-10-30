@@ -6,8 +6,8 @@ class RoleAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'full_name', 'email')
-    search_fields = ('full_name', 'email')
+    list_display = ('id', 'first_name', 'second_name', 'email')
+    search_fields = ('id', 'first_name', 'second_name', 'email')
 
 admin.site.register(Role, RoleAdmin)
 admin.site.register(User, UserAdmin)

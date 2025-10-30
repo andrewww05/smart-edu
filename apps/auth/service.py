@@ -1,2 +1,6 @@
 class AuthService:
-    pass
+    def login(self):
+        pass
+    
+    def register(self):
+        pass

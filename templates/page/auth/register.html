@@ -7,26 +7,64 @@
 <link rel="stylesheet" href="{% static 'css/pages/auth.css' %}">
 {% endblock %}
 
+{% block js %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const inputs = document.querySelectorAll('.se-input');
+
+  inputs.forEach(input => {
+    input.addEventListener('input', () => {
+      const field = input.closest('.se-field');
+      if (field && field.classList.contains('error')) {
+        field.classList.remove('error');
+        const errorMsg = field.querySelector('.se-error');
+        if (errorMsg) errorMsg.remove();
+      }
+    });
+  });
+});
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="auth__wrapper">
     <h1 class="auth__title">Реєстрація</h1>
     <div class="auth se-card">
-        <form class="auth__form">
-            <div class="se-field">
+        <form class="auth__form" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="se-field {% if form.email.errors %}error{% endif %}">
                 <label class="se-label" for="email">Корпоративна пошта</label>
-                <input class="se-input" type="email" id="email" name="email" placeholder="@chnu.edu.ua" required>
+                <input class="se-input" type="email" id="email" name="email" placeholder="@chnu.edu.ua" required
+                    value="{{ form.email.value|default:'' }}">
+                {% if form.email.errors %}
+                <span class="se-error">{{ form.email.errors.0 }}</span>
+                {% endif %}
             </div>
-            <div class="se-field">
-                <label class="se-label" for="name">Ім'я</label>
-                <input class="se-input" type="text" id="name" name="name" required>
+
+            <div class="se-field {% if form.first_name.errors %}error{% endif %}">
+                <label class="se-label" for="first_name">Ім'я</label>
+                <input class="se-input" type="text" id="first_name" name="first_name" required
+                    value="{{ form.first_name.value|default:'' }}">
+                {% if form.first_name.errors %}
+                <span class="se-error">{{ form.first_name.errors.0 }}</span>
+                {% endif %}
             </div>
-            <div class="se-field">
-                <label class="se-label" for="surname">Прізвище</label>
-                <input class="se-input" type="text" id="surname" name="surname" required>
+
+            <div class="se-field {% if form.second_name.errors %}error{% endif %}">
+                <label class="se-label" for="second_name">Прізвище</label>
+                <input class="se-input" type="text" id="second_name" name="second_name" required
+                    value="{{ form.second_name.value|default:'' }}">
+                {% if form.second_name.errors %}
+                <span class="se-error">{{ form.second_name.errors.0 }}</span>
+                {% endif %}
             </div>
-            <div class="se-field">
+
+            <div class="se-field {% if form.password.errors %}error{% endif %}">
                 <label class="se-label" for="password">Пароль</label>
                 <input class="se-input" type="password" id="password" name="password" required>
+                {% if form.password.errors %}
+                <span class="se-error">{{ form.password.errors.0 }}</span>
+                {% endif %}
             </div>
             <div class="se-checkbox-wrapper">
                 <input class="se-checkbox" type="checkbox" id="remember" name="remember">

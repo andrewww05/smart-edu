@@ -27,8 +27,10 @@ class User(models.Model):
         related_name='users'
     )
     email = models.CharField(max_length=255, unique=True)
+    email_veriefied = models.BooleanField(db_default=False)
     password_hash = models.TextField()
-    full_name = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    second_name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -38,4 +40,4 @@ class User(models.Model):
         verbose_name_plural = 'Users'
 
     def __str__(self):
-        return self.full_name
+        return f"ID {self.id}: {self.first_name} {self.second_name}"
