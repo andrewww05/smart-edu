@@ -1,5 +1,8 @@
+{% load static %}
+
 <html lang="uk">
 <head>
+    <link rel="icon" href="{% static 'svg/favicon.svg' %}" type="image/svg+xml">
     <title>{% block title %}Authorization{% endblock %}</title>
     {% include "../component/scripts.html" %}
     {% include "../component/stylesheets.html" %}

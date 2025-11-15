@@ -1,9 +1,13 @@
 import re
 from django import forms
-from apps.users.models import User
 from django.conf import settings
+from apps.users.service import UsersService
+from smartedu.common.constants import Regex
+
 
 class LoginForm(forms.Form):
+    _usersService = UsersService()
+    
     email = forms.EmailField(
         label='Електронна адреса',
         required=True,
@@ -23,10 +27,10 @@ class LoginForm(forms.Form):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
+        if not re.match(Regex.EMAIL, email):
             raise forms.ValidationError('Невірна електронна адреса')
 
-        if not User.objects.filter(email=email).exists():
+        if not self._usersService.exists(email):
             raise forms.ValidationError('Користувач з такою електронною адресою не зареєстрований на сайті')
 
         return email
@@ -73,10 +77,10 @@ class RegisterForm(forms.Form):
         email = self.cleaned_data.get('email')
         domain = email.split('@')[1]
 
-        if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
+        if not re.match(Regex.EMAIL, email):
             raise forms.ValidationError('Невірна електронна адреса')
 
-        if User.objects.filter(email=email).exists():
+        if self._usersService.exists(email):
             raise forms.ValidationError('Користувач з такою електронною адресою вже зареєстрований на сайті')
 
         if not settings.DEBUG and domain != "chnu.edu.ua":
@@ -92,13 +96,13 @@ class RegisterForm(forms.Form):
 
     def clean_first_name(self):
         first_name = self.cleaned_data.get('first_name')
-        if not re.match(r'^[A-Za-zА-Яа-яЇїІіЄє\'-]{2,30}$', first_name):
+        if not re.match(Regex.USERNAME_LENGTH, first_name):
             raise forms.ValidationError('Ім’я повинно містити лише літери та мати від 2 до 30 символів')
         return first_name
 
     def clean_second_name(self):
         second_name = self.cleaned_data.get('second_name')
-        if not re.match(r'^[A-Za-zА-Яа-яЇїІіЄє\'-]{2,30}$', second_name):
+        if not re.match(Regex.USERNAME_LENGTH, second_name):
             raise forms.ValidationError('Прізвище повинно містити лише літери та мати від 2 до 30 символів')
         return second_name
 
