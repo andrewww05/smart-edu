@@ -6,7 +6,10 @@ from smartedu.common.constants import Regex
 
 
 class LoginForm(forms.Form):
-    _usersService = UsersService()
+    def __init__(self, data=None, *args, **kwargs):
+        super().__init__(data, *args, **kwargs)
+        
+        self._usersService = UsersService()
     
     email = forms.EmailField(
         label='Електронна адреса',
@@ -42,6 +45,11 @@ class LoginForm(forms.Form):
         return remember
 
 class RegisterForm(forms.Form):
+    def __init__(self, data=None, *args, **kwargs):
+        super().__init__(data, *args, **kwargs)
+
+        self._usersService = UsersService()
+
     email = forms.EmailField(
         label='Електронна адреса',
         required=True,

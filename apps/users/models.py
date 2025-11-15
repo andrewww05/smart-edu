@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from smartedu.common.constants.access_level import AccessLevel
 
 class Role(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -75,3 +76,9 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.second_name} ({self.email})"
+    
+    def has_access_level(self, required_level):
+        return self.role and self.role.access_level >= required_level
+    
+    def is_admin(self):
+        return self.has_access_level(AccessLevel.ADMIN)
