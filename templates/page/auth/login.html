@@ -1,0 +1,62 @@
+{% extends "../../layout/layout.html" %}
+{% load static %}
+
+{% block title %}Увійти{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pages/auth.css' %}">
+{% endblock %}
+
+{% block js %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const inputs = document.querySelectorAll('.se-input');
+
+  inputs.forEach(input => {
+    input.addEventListener('input', () => {
+      const field = input.closest('.se-field');
+      if (field && field.classList.contains('error')) {
+        field.classList.remove('error');
+        const errorMsg = field.querySelector('.se-error');
+        if (errorMsg) errorMsg.remove();
+      }
+    });
+  });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="auth__wrapper">
+    <h1 class="auth__title">Увійти</h1>
+    <div class="auth se-card">
+        <form class="auth__form" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="se-field {% if form.email.errors %}error{% endif %}">
+                <label class="se-label" for="email">Корпоративна пошта</label>
+                <input class="se-input" type="email" id="email" name="email" placeholder="@chnu.edu.ua" required
+                    value="{{ form.email.value|default:'' }}">
+                {% if form.email.errors %}
+                <span class="se-error">{{ form.email.errors.0 }}</span>
+                {% endif %}
+            </div>
+            <div class="se-field {% if form.password.errors %}error{% endif %}">
+                <label class="se-label" for="password">Пароль</label>
+                <input class="se-input" type="password" id="password" name="password" required>
+                {% if form.password.errors %}
+                <span class="se-error">{{ form.password.errors.0 }}</span>
+                {% endif %}
+            </div>
+            <div class="auth__checkbox-wrapper">
+                <input class="se-checkbox" type="checkbox" id="remember" name="remember">
+                <label class="se-checkbox-label" for="remember">Запам'ятати мене</label>
+            </div>
+            <button class="se-button" type="submit">Увійти</button>
+        </form>
+    </div>
+    <div class="auth__footer">
+        <span class="auth__footer-text">Ще не маєте акаунту?</span>
+        <a class="auth__footer-link" href="{% url 'register' %}">Зареєструватися</a>
+    </div>
+</div>
+{% endblock %}

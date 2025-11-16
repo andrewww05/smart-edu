@@ -1,0 +1,12 @@
+{% extends "../../layout/layout.html" %}
+
+{% block title %}Головна{% endblock %}
+
+{% block content %}
+<div>
+    <h1 style="color: white;">Home</h1>
+    {% if user %}
+    <h1 style="color: white;">Welcome {{ user.first_name }}!</h1>
+    {% endif %}
+</div>
+{% endblock %}
