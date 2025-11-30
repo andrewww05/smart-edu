@@ -1,13 +1,13 @@
-div.se-card {
-  --card-background-color: var(--brand-purple-50);
-  --card-border-color: var(--brand-purple-light-60);
-  --card-glow-color: rgba(255, 255, 255, 0.25);
+.se-card {
+    --card-background-color: var(--brand-purple-50);
+    --card-border-color: var(--brand-purple-light-60);
+    --card-glow-color: rgba(255, 255, 255, 0.25);
 
-  background: var(--card-background-color);
-  border: 1px solid var(--card-border-color);
-  box-shadow: 0 4px 20px 0 var(--card-glow-color);
-  border-radius: 40px;
-  padding: 30px;
+    background: var(--card-background-color);
+    border: 1px solid var(--card-border-color);
+    box-shadow: 0 4px 20px 0 var(--card-glow-color);
+    border-radius: 40px;
+    padding: 30px;
 }
 
 /* Input */
@@ -71,7 +71,8 @@ label.se-checkbox-label {
 }
 
 /* Button */
-button.se-button {
+/* Button */
+.se-button {
     background: var(--brand-purple);
     border: 2px solid var(--brand-purple-light-60);
     border-radius: 12px;
@@ -81,23 +82,27 @@ button.se-button {
     padding: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-block;
+    /* Ensure it works for anchors */
+    text-align: center;
 }
 
-button.se-button:hover {
+.se-button:hover {
     background: var(--brand-purple-80);
     border-color: var(--brand-purple-light);
 }
 
-button.se-button:active {
+.se-button:active {
     transform: scale(0.98);
 }
 
+
 /* Error */
-.se-field > .se-error::before {
+.se-field>.se-error::before {
     content: '* ';
     color: var(--brand-error);
 }
 
-.se-field > .se-error {
+.se-field>.se-error {
     color: var(--brand-error);
 }
