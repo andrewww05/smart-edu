@@ -1,12 +1,67 @@
 {% extends "../../layout/layout.html" %}
+{% load static %}
 
 {% block title %}Головна{% endblock %}
 
 {% block content %}
-<div>
-    <h1 style="color: white;">Home</h1>
-    {% if user %}
-    <h1 style="color: white;">Welcome {{ user.first_name }}!</h1>
+<div class="home__container">
+    {% if not user.is_authenticated %}
+    <!-- Hero Section -->
+    <div class="hero__section">
+        <h1 class="hero__title">Твоя розумна<br>освітня програма</h1>
+        <p class="hero__subtitle">
+            Розклад, відповіді на часті питання, орієнтація по<br>корпусу - все в одному місці
+        </p>
+        <a href="/register" class="se-button hero__button">
+            Зареєструватися
+        </a>
+    </div>
+    {% else %}
+    <div style="text-align: center; margin-bottom: 60px; margin-top: 60px;">
+        <h1 class="hero__title">SmartEdu - твоя розумна<br>освітня програма</h1>
+    </div>
+    <!-- Cards Section -->
+    <div class="cards__section">
+
+        <!-- Schedule Card -->
+        <a href="/schedule" class="se-card home__card">
+            <div class="card__header">
+                <img src="{% static 'svg/calendar.svg' %}" alt="calendar" class="card__icon">
+                <h2 class="card__title">Розклад</h2>
+            </div>
+            <ul class="card__list">
+                <li>Інтерактивний перегляд розкладу</li>
+                <li>Фільтрація за групами, викладачами, аудиторіями</li>
+                <li>Завжди актуальний розклад</li>
+            </ul>
+        </a>
+
+        <!-- FAQ Card -->
+        <a href="/faq" class="se-card home__card">
+            <div class="card__header">
+                <img src="{% static 'svg/chat.svg' %}" alt="chat" class="card__icon">
+                <h2 class="card__title">Питання/<br>Відповіді</h2>
+            </div>
+            <ul class="card__list">
+                <li>Відповіді на найчастіші питання</li>
+                <li>Підтримка контекстних діалогів</li>
+            </ul>
+        </a>
+
+        <!-- Map Card -->
+        <a href="/map" class="se-card home__card">
+            <div class="card__header">
+                <img src="{% static 'svg/location.svg' %}" alt="location" class="card__icon">
+                <h2 class="card__title">Мапа корпусу</h2>
+            </div>
+
+            <ul class="card__list">
+                <li>Орієнтація по корпусу</li>
+                <li>Місцерозташування всіх корпусів</li>
+            </ul>
+        </a>
+    </div>
+
     {% endif %}
 </div>
 {% endblock %}
