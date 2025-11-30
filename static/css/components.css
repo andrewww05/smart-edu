@@ -42,7 +42,7 @@ input.se-input::placeholder {
     color: var(--input-placeholder);
 }
 
-.se-field.error>input.se-input {
+.se-field.error > input.se-input {
     border: none;
     background-color: var(--input-bg-error);
     border: 3px solid var(--brand-error);
