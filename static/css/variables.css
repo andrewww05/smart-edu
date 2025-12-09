@@ -1,35 +1,37 @@
 :root {
     /* Colors */
-    --brand-purple-dark: rgb(14 10 59);
-    --brand-purple: rgb(46 27 103);
-    --brand-purple-light: rgb(151 71 255);
-    --brand-error: rgba(255, 61, 0, 1);
-    --brand-warning: rgba(255, 204, 0, 1);
+    --brand-purple-dark: #0E0A3B;
+    --brand-purple: #1A1245; /* Slightly lighter than dark for depth */
+    --brand-purple-light: #7B3EF1; /* Brighter accent */
+    --brand-error: #FF3D00;
+    --brand-warning: #FFCC00;
 
-    --brand-purple-50: rgba(46, 27, 103, 0.5);
-    --brand-purple-80: rgba(46, 27, 103, 0.8);
+    --brand-purple-50: rgba(46, 27, 103, 0.4);
+    --brand-purple-80: rgba(14, 10, 59, 0.85);
 
-    --brand-purple-dark-60: rgba(14, 10, 59, 0.6);
-    --brand-purple-light-60: rgba(151, 71, 255, 0.6);
-
-    /* / / / */
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    
     /* Theme */
-    /* / / / */
     --bg-color: var(--brand-purple-dark);
-    --bg-main: var(--brand-purple-dark);
-    --font-color-primary: rgb(255, 255, 255);
-    --font-color-secondary: rgba(0, 0, 0, 0.5);
+    --font-color-primary: #FFFFFF;
+    --font-color-secondary: rgba(255, 255, 255, 0.7);
 
-    --border-color-light: var(--brand-purple-light-60);
+    --border-color-light: rgba(255, 255, 255, 0.1); /* Subtle divider */
 
     /* Label */
     --label-text: rgba(255, 255, 255, 0.9);
 
     /* Input */
-    --input-bg: rgba(255, 255, 255, 0.8);
-    --input-bg-error: rgba(255, 255, 255, 0.6);
-    --input-bg-focus: rgba(255, 255, 255, 1);
-    --input-text: rgb(0 0 0);
-    --input-placeholder: rgba(0, 0, 0, 0.5);
-    --input-border: none;
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --input-bg-focus: #FFFFFF;
+    --input-text: #0E0A3B;
+    --input-placeholder: rgba(14, 10, 59, 0.4);
+    --input-border-radius: 8px;
+
+    /* Components */
+    --card-radius: 12px;
+    --btn-radius: 8px;
 }
