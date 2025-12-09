@@ -1,0 +1,66 @@
+{% extends "../../layout/layout.html" %}
+{% load static %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block content %}
+<div class="home__container">
+    <div style="text-align: center; margin-bottom: 40px; margin-top: 60px;">
+        <h1 class="hero__title">Часті питання</h1>
+        <p class="hero__subtitle">Тут ви знайдете відповіді на найпоширеніші запитання</p>
+    </div>
+
+    <div class="faq__section">
+        <!-- Question 1 -->
+        <div class="se-card home__card faq__card">
+            <h3 class="card__title">Як зареєструватися?</h3>
+            <p class="faq__answer">Для реєстрації натисніть кнопку "Зареєструватися" на головній сторінці, заповніть необхідні поля та підтвердіть свою електронну пошту.</p>
+        </div>
+        <!-- Question 2 -->
+        <div class="se-card home__card faq__card">
+             <h3 class="card__title">Де знайти розклад?</h3>
+             <p class="faq__answer">Розклад занять доступний у розділі "Розклад". Ви можете переглядати його за групами, викладачами або аудиторіями.</p>
+        </div>
+        <!-- Question 3 -->
+        <div class="se-card home__card faq__card">
+             <h3 class="card__title">Як зв'язатися з підтримкою?</h3>
+             <p class="faq__answer">Якщо у вас виникли технічні проблеми або питання, напишіть нам на пошту <a href="mailto:iftcs@chnu.edu.ua" style="color: var(--brand-purple-light);">iftcs@chnu.edu.ua</a>.</p>
+        </div>
+        <!-- Question 4 -->
+        <div class="se-card home__card faq__card">
+             <h3 class="card__title">Чи є мобільний додаток?</h3>
+             <p class="faq__answer">На даний момент SmartEdu доступний як веб-додаток, оптимізований для мобільних пристроїв.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .faq__section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto 60px auto;
+    }
+    .faq__card {
+        padding: 30px;
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .faq__card:hover {
+        transform: translateY(-2px);
+    }
+    .faq__answer {
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 12px;
+        font-size: 18px;
+        line-height: 1.5;
+    }
+    .card__title {
+        margin-bottom: 0;
+    }
+</style>
+{% endblock %}

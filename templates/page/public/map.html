@@ -1,0 +1,31 @@
+{% extends "../../layout/layout.html" %}
+{% load static %}
+
+{% block title %}Мапа корпусу{% endblock %}
+
+{% block content %}
+<div class="home__container">
+    <div style="text-align: center; margin-bottom: 40px; margin-top: 60px;">
+        <h1 class="hero__title">Мапа корпусу</h1>
+        <p class="hero__subtitle">м.Чернівці, вул.Сторожинецька, 101</p>
+    </div>
+
+    <div class="map__section">
+        <iframe width="100%" height="600" style="border:0; border-radius: 16px;" loading="lazy" allowfullscreen
+            src="https://maps.google.com/maps?width=100%25&height=600&hl=uk&q=%D0%B2%D1%83%D0%BB.%D0%A1%D1%82%D0%BE%D1%80%D0%BE%D0%B6%D0%B8%D0%BD%D0%B5%D1%86%D1%8C%D0%BA%D0%B0,%20101,%20%D0%A7%D0%B5%D1%80%D0%BD%D1%96%D0%B2%D1%86%D1%96&t=&z=15&ie=UTF8&iwloc=B&output=embed">
+        </iframe>
+    </div>
+</div>
+
+<style>
+    .map__section {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto 60px auto;
+        border-radius: 16px;
+        padding: 20px;
+        background: rgba(46, 27, 103, 0.4);
+        backdrop-filter: blur(10px);
+    }
+</style>
+{% endblock %}
