@@ -63,3 +63,5 @@ Open your browser and navigate to `http://127.0.0.1:8000/`.
 - kolosochok
 - Oleksiy Gakman
 - Tatiana Gonchar
+- Khrystyna Fedik
+- Anna Protsenko 
