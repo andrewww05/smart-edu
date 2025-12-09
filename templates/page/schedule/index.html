@@ -1,0 +1,366 @@
+{% extends "../../layout/layout.html" %}
+{% load static %}
+
+{% block title %}Розклад занять{% endblock %}
+
+{% block content %}
+<div class="home__container">
+    <div class="schedule__header">
+        <h1 class="hero__title">Розклад занять для студентів</h1>
+        <a href="#" class="schedule__link" id="teacher-mode-btn">Для викладачів</a>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="filters__section">
+        <div class="filter__row">
+            <select id="academic-year" class="se-select">
+                <option value="">Виберіть навчальний рік</option>
+                {% for year in academic_years %}
+                <option value="{{ year.id }}">{{ year.name }}</option>
+                {% endfor %}
+            </select>
+            <select id="semester" class="se-select">
+                <option value="">Осінній/Весняний семестр</option>
+                {% for sem in semesters %}
+                <option value="{{ sem.id }}">{{ sem.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="filter__row">
+            <div class="week-days__selector">
+                <button class="day-btn" data-day="0">Пн</button>
+                <button class="day-btn" data-day="1">Вт</button>
+                <button class="day-btn" data-day="2">Ср</button>
+                <button class="day-btn" data-day="3">Чт</button>
+                <button class="day-btn" data-day="4">Пт</button>
+                <button class="day-btn" data-day="5">Сб</button>
+            </div>
+            <select id="week-type" class="se-select">
+                <option value="">Парний/Непарний тиждень</option>
+                {% for wt in week_types %}
+                <option value="{{ wt.id }}">{{ wt.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="filter__row" id="student-filters">
+            <select id="group" class="se-select">
+                <option value="">Виберіть номер групи</option>
+                {% for group in groups %}
+                <option value="{{ group.id }}">{{ group.name }}</option>
+                {% endfor %}
+            </select>
+            <label class="checkbox-container">
+                <input type="checkbox" id="shortened-form">
+                <span class="checkmark"></span>
+                Скорочена форма навчання
+            </label>
+        </div>
+
+        <div class="filter__row hidden" id="teacher-filters">
+            <select id="teacher" class="se-select" style="width: 100%;">
+                <option value="">Виберіть викладача</option>
+                {% for teacher in teachers %}
+                <option value="{{ teacher.id }}">{{ teacher.full_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <!-- Schedule Grid -->
+    <div class="schedule__grid" id="schedule-grid">
+        <!-- Cards will be populated here by JS -->
+        <p class="empty-message">Оберіть фільтри для відображення розкладу</p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block css %}
+<style>
+    .schedule__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-top: 60px;
+        margin-bottom: 40px;
+    }
+
+    .schedule__link {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: underline;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .schedule__link:hover {
+        color: #fff;
+    }
+
+    .filters__section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 60px;
+    }
+
+    .filter__row {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .se-select {
+        flex: 1;
+        padding: 12px 20px;
+        border-radius: 8px;
+        border: none;
+        background: rgba(255, 255, 255, 0.8);
+        font-size: 16px;
+        color: #000;
+        cursor: pointer;
+    }
+
+    .week-days__selector {
+        display: flex;
+        gap: 10px;
+        flex: 1;
+    }
+
+    .day-btn {
+        flex: 1;
+        padding: 12px 0;
+        border-radius: 8px;
+        border: none;
+        background: rgba(255, 255, 255, 0.8);
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .day-btn.active {
+        background: var(--brand-purple-light);
+        color: #fff;
+    }
+
+    .day-btn:hover:not(.active) {
+        background: #fff;
+    }
+
+    .checkbox-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #fff;
+        cursor: pointer;
+        margin-left: 20px;
+    }
+
+    .checkbox-container input {
+        width: 20px;
+        height: 20px;
+    }
+
+    .schedule__grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-bottom: 60px;
+        min-height: 200px;
+    }
+
+    .schedule-card {
+        background: rgba(46, 27, 103, 0.4);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 180px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .schedule-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--brand-purple-light);
+    }
+
+    .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+
+    .subject-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .subject-time {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .card-details {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 4px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .card-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 10px;
+        margin-top: auto;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: right;
+    }
+
+    .empty-message {
+        grid-column: 1 / -1;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 18px;
+        margin-top: 40px;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+</style>
+{% endblock %}
+
+{% block js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const filters = {
+            academic_year: document.getElementById('academic-year'),
+            semester: document.getElementById('semester'),
+            week_type: document.getElementById('week-type'),
+            group: document.getElementById('group'),
+            teacher: document.getElementById('teacher'),
+            shortened_form: document.getElementById('shortened-form'),
+            day_buttons: document.querySelectorAll('.day-btn')
+        };
+
+        let activeDay = null;
+        let isTeacherMode = false;
+
+        const updateSchedule = async () => {
+            const params = new URLSearchParams({
+                academic_year: filters.academic_year.value,
+                semester: filters.semester.value,
+                week_type: filters.week_type.value,
+                is_teacher_mode: isTeacherMode
+            });
+
+            if (isTeacherMode) {
+                params.append('teacher', filters.teacher.value);
+            } else {
+                params.append('group', filters.group.value);
+            }
+
+            if (activeDay !== null) {
+                params.append('day_of_week', activeDay);
+            }
+
+            try {
+                const response = await fetch(`/schedule/api/filter/?${params.toString()}`);
+                const data = await response.json();
+                renderSchedule(data.schedule);
+            } catch (error) {
+                console.error("Error fetching schedule:", error);
+            }
+        };
+
+        const renderSchedule = (items) => {
+            const grid = document.getElementById('schedule-grid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = '<p class="empty-message">Розклад відсутній для вибраних параметрів</p>';
+                return;
+            }
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'schedule-card';
+                card.innerHTML = `
+                    <div class="card-top">
+                        <div class="subject-name">${item.subject}</div>
+                        <div class="subject-time">${item.time_start}-${item.time_end}</div>
+                    </div>
+                    <div class="card-details">
+                        <span>${item.type}</span>
+                        <span>${item.building}, ауд.${item.room}</span>
+                    </div>
+                     ${!isTeacherMode ? `<div class="card-details"><span>${item.group}</span></div>` : ''}
+                    <div class="card-bottom">
+                        ${item.teacher}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        };
+
+        // Event Listeners
+        Object.values(filters).forEach(filter => {
+            if (filter instanceof NodeList) {
+                filter.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const day = btn.dataset.day;
+                        if (activeDay === day) {
+                            activeDay = null;
+                            btn.classList.remove('active');
+                        } else {
+                            activeDay = day;
+                            filters.day_buttons.forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                        }
+                        updateSchedule();
+                    });
+                });
+            } else {
+                filter.addEventListener('change', updateSchedule);
+            }
+        });
+
+        // Mode Switch
+        const modeBtn = document.getElementById('teacher-mode-btn');
+        const studentFilters = document.getElementById('student-filters');
+        const teacherFilters = document.getElementById('teacher-filters');
+        const title = document.querySelector('.hero__title');
+
+        modeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            isTeacherMode = !isTeacherMode;
+
+            if (isTeacherMode) {
+                modeBtn.textContent = 'Для студентів';
+                title.textContent = 'Розклад занять для викладачів';
+                studentFilters.classList.add('hidden');
+                teacherFilters.classList.remove('hidden');
+            } else {
+                modeBtn.textContent = 'Для викладачів';
+                title.textContent = 'Розклад занять для студентів';
+                studentFilters.classList.remove('hidden');
+                teacherFilters.classList.add('hidden');
+            }
+            updateSchedule();
+        });
+    });
+</script>
+{% endblock %}
