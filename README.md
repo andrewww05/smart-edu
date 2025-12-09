@@ -61,3 +61,5 @@ Open your browser and navigate to `http://127.0.0.1:8000/`.
 ## Team Authors
 - andrewww05
 - kolosochok
+- Oleksiy Gakman
+- Tatiana Gonchar
