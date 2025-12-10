@@ -2,7 +2,7 @@
 
 <div class="header__wrapper">
     <a class="header__logo" href="/">
-        <img src="{% static 'svg/smart-edu-logo.svg' %}" alt="logo" />
+        <img src="{% static 'svg/smart-edu-logo.svg' %}" alt="SmartEdu" />
     </a>
 
     <ul class="header__button_group">
@@ -33,15 +33,15 @@
         </li>
     </ul>
 
-    {% if user.is_authenticated %}
-    <a href="/logout" class="se-button se-button--outline se-button--small" style="text-decoration: none;">
-        Вийти
-    </a>
-    {% else %}
-    <a href="/login" class="se-button se-button--outline se-button--small" style="text-decoration: none;">
-        Увійти
-    </a>
-    {% endif %}
-
-
+    <div>
+        {% if user.is_authenticated %}
+        <a href="/logout" class="se-button se-button--outline se-button--small">
+            Вийти
+        </a>
+        {% else %}
+        <a href="/login" class="se-button se-button--outline se-button--small">
+            Увійти
+        </a>
+        {% endif %}
+    </div>
 </div>

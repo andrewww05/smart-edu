@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.main.apps.MainConfig',
     'rest_framework',
+    'apps.schedule',
 ]
 
 MIDDLEWARE = [
