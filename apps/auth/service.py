@@ -28,28 +28,28 @@ class AuthService:
             'success': True,
         }
     
-def register_user(self, request, dto):
-    try:
-        remember = dto.pop('remember')
-        user = self._usersService.create(dto)
-        
-        if not user:
+    def register_user(self, request, dto):
+        try:
+            remember = dto.pop('remember')
+            user = self._usersService.create(dto)
+            
+            if not user:
+                return {
+                    'success': False,
+                    'error': ExceptionText.UNEXPECTED_ERROR
+                }
+            login(request, user)
+
+            if remember:
+                request.session.set_expiry(60 * 60 * 24 * 30)
+            else:
+                request.session.set_expiry(0)
+
+            return {
+                'success': True,
+            }
+        except Exception:
             return {
                 'success': False,
                 'error': ExceptionText.UNEXPECTED_ERROR
             }
-        login(request, user)
-
-        if remember:
-            request.session.set_expiry(60 * 60 * 24 * 30)
-        else:
-            request.session.set_expiry(0)
-
-        return {
-            'success': True,
-        }
-    except Exception:
-        return {
-            'success': False,
-            'error': ExceptionText.UNEXPECTED_ERROR
-        }
